@@ -1,0 +1,19 @@
+let
+  func = (TextValue as text) as text =>
+    let
+      //Convert TextValue into a list of words by splitting at each space character
+      TextList = Text.Split(TextValue, " "), 
+      //Generate a list of space and non-printable characters (ASCII codes 0-32)
+      CharactersToRemove = List.Transform({0 .. 32}, each Character.FromNumber(_)), 
+      //Remove non-printable characters from TextList
+      TextListClean = List.RemoveItems(TextList, CharactersToRemove), 
+      //Rejoin the list into a single text value with a space character between each item
+      TextListJoin = Text.Combine(TextListClean, " ")
+    in
+      TextListJoin, 
+  documentation = [
+    Documentation.Name = "Text.Hygene", 
+    Documentation.LongDescription = "This function takes a text value, splits it into words, removes any space and non-printable characters (ASCII codes 0-32), and then joins the cleaned words back into a single text value with single spaces." 
+  ]
+in
+  Value.ReplaceType(func, Value.ReplaceMetadata(Value.Type(func), documentation))
