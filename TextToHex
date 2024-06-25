@@ -1,0 +1,25 @@
+let
+  func = (TextValue as text) as text =>
+    let
+      //Split Text seed into a list with its individual characters
+      CharactersList = Text.ToList(TextValue), 
+      //Generate a list with space, control and symbol character (ASCII codes 0-47, 58-63, 91-96, 123-191)
+      CharactersToRemove = List.Transform(
+        {0 .. 47, 58 .. 63, 91 .. 96, 123 .. 191}, 
+        each Character.FromNumber(_)
+      ), 
+      //Remove characters from CharactersList
+      CharactersListClean = List.RemoveItems(CharactersList, CharactersToRemove), 
+      //Convert each character to its ASCII value and then to hexadecimal
+      HexList = List.Transform(CharactersListClean, each Number.ToText(Character.ToNumber(_), "X2")), 
+      //Combine the hexadecimal values into a single string
+      HexString = Text.Combine(HexList)
+    in
+      HexString, 
+  documentation = [
+    Documentation.Name = "TextToHex", 
+    Documentation.LongDescription
+      = "This function removes spaces, control characters, and symbol characters (ASCII codes 0-47, 58-63, 91-96, and 123-191) from a given text value, and then converts the remaining characters into their combined hexadecimal representation."
+  ]
+in
+  Value.ReplaceType(func, Value.ReplaceMetadata(Value.Type(func), documentation))
