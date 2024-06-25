@@ -15,7 +15,7 @@ let
       ListJoin, 
   documentation = [
     Documentation.Name = "TextHygene", 
-    Documentation.LongDescription = "This function takes a text value removing any extra spaces, and non-printable characters (ASCII codes 0-32), and then joins back the words back into a single text value with single spaces." 
+    Documentation.LongDescription = "This function takes a text value removing any extra spaces, and non-printable characters (ASCII codes 0-31), and then joins back the words back into a single text value with single spaces." 
   ]
 in
   Value.ReplaceType(func, Value.ReplaceMetadata(Value.Type(func), documentation))
