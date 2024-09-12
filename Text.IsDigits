@@ -1,0 +1,17 @@
+let
+  func = (TextValue as text) as text =>
+    let
+      //Convert the seed text into a list
+      SeedList = Text.ToList(TextValue),
+      //Generate a list of digit characters (ASCII codes 48-57)
+      ComparisonList = List.Transform({48..57}, each Character.FromNumber(_)),
+      //Compares content from ControlList against SeedList
+      ListComparison = List.ContainsAll(ComparisonList, SeedList)
+    in
+    ListComparison,
+  documentation = [
+    Documentation.Name = "Text.IsDigits", 
+    Documentation.LongDescription = "This function takes a text value and verifies whether the value consists entirely of digit characters (ASCII codes 48-57) and returns true if all characters are digits, otherwise false." 
+  ]
+in
+  Value.ReplaceType(func, Value.ReplaceMetadata(Value.Type(func), documentation))
