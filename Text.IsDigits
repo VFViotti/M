@@ -1,5 +1,5 @@
 let
-  func = (TextValue as text) as text =>
+  func = (TextValue as text) as logical =>
     let
       //Convert the seed text into a list
       SeedList = Text.ToList(TextValue),
